@@ -1,0 +1,75 @@
+openapi: 3.0.1
+info:
+  title: "Celesta-Demo API"
+  version: "1.0"
+paths:
+  /api/v1/hello:
+    get:
+      operationId: hello
+      responses:
+        "200":
+          description: "Service is working"
+          content:
+            application/json:
+              schema:
+                type: string
+
+  /api/v1/order:
+    post:
+      operationId: post_order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrderDTO"
+        required: true
+      responses:
+        "200":
+          description: order posted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderDTO'
+
+  /api/v1/item:
+    get:
+      operationId: get_all_items
+      responses:
+        "200":
+          description: List of all items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ItemDTO'
+
+components:
+  schemas:
+    OrderDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        customer_id:
+          type: integer
+        item_id:
+          type: string
+        quantity:
+          type: integer
+        price:
+          type: integer
+        amount:
+          type: integer
+
+    ItemDTO:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        ordered_quantity:
+          type: integer
+        ordered_amount:
+          type: integer
